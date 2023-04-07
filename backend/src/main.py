@@ -26,7 +26,7 @@ transcriber = pipeline(
 
 
 @app.post('/speech2text')
-async def speech2text(audio: UploadFile):
+async def predict(audio: UploadFile):
     ext = pathlib.Path(audio.filename).suffix
     with tempfile.NamedTemporaryFile(suffix=ext) as tmp_file:
         tmp_file.write(audio.file.read())
