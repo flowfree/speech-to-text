@@ -21,7 +21,6 @@ export default function App() {
   function handleUploadProgress(progressEvent: AxiosProgressEvent) {
     if (progressEvent.total) {
       const percentage = Math.round(progressEvent.loaded * 100) / progressEvent.total
-      console.log(`${percentage}%`)
       setUploadProgress(percentage)
     }
   }
@@ -30,7 +29,6 @@ export default function App() {
     e.preventDefault()
 
     if (selectedFile) {
-      console.log('Submitting file')
       const baseURL = process.env.REACT_APP_API_BASE_URL
       const formData = new FormData()
       formData.append('audio', selectedFile)
@@ -40,6 +38,7 @@ export default function App() {
           onUploadProgress: handleUploadProgress
         })
         setPredictions([data, ...predictions])
+        setUploadProgress(null)
       } catch (error) {
         if (error instanceof AxiosError) {
           console.error(error)
@@ -80,6 +79,7 @@ export default function App() {
           <input type="reset" value="Reset" />
         </p>
       </form>
+      {uploadProgress && <p>Upload: {uploadProgress}%</p>}
       <ul>
         {predictions.map((pred, idx) => (
           <li key={pred.audio + '-' + idx}>
