@@ -3,10 +3,22 @@ import tempfile
 import pathlib
 
 from fastapi import FastAPI, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from transformers import pipeline
 
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        'https://localhost',
+        'https://localhost:3000'
+    ], 
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*'],
+)
 
 
 @app.get('/')
@@ -24,7 +36,7 @@ transcriber = pipeline(
     chunk_length_s=30,
 )
 
-@app.post('/speech2text')
+@app.post('/predict')
 async def predict(audio: UploadFile):
     ext = pathlib.Path(audio.filename).suffix
     with tempfile.NamedTemporaryFile(suffix=ext) as tmp_file:
