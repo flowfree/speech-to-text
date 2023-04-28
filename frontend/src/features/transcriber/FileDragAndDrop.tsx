@@ -1,8 +1,13 @@
 import React, { useState, useRef } from 'react'
 
-export default function FileDragAndDrop() {
+interface Props {
+  onSelected: (files: FileList) => void
+}
+
+export default function FileDragAndDrop({ onSelected }: Props) {
   const [isDragging, setIsDragging] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const formRef = useRef<HTMLFormElement>(null)
 
   function handleDragOver(e: React.DragEvent<HTMLDivElement>) {
     e.preventDefault()
@@ -12,14 +17,17 @@ export default function FileDragAndDrop() {
     e.preventDefault();
     setIsDragging(false)
 
-    const file = e.dataTransfer.files[0];
-    if (file) {
-      console.log(file);
+    const files = e.dataTransfer.files
+    if (files) {
+      onSelected(files)
     }
   };
 
   function handleClick() {
     setIsDragging(true)
+    if (formRef.current) {
+      formRef.current.reset()
+    }
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -27,9 +35,9 @@ export default function FileDragAndDrop() {
 
   function handleFileInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     setIsDragging(false)
-    const file = event.target.files?.[0];
-    if (file) {
-      console.log(file);
+    const files = event.target.files
+    if (files) {
+      onSelected(files)
     }
   };
 
@@ -63,13 +71,15 @@ export default function FileDragAndDrop() {
         <p className="text-sm text-gray-500">
           MP3, OGG, and WAV files are allowed
         </p>
-        <input 
-          type="file" 
-          ref={fileInputRef} 
-          onChange={handleFileInputChange} 
-          multiple={true}
-          className="hidden" 
-        />
+        <form ref={formRef} action="/" method="post">
+          <input 
+            type="file" 
+            ref={fileInputRef} 
+            onChange={handleFileInputChange} 
+            multiple={true}
+            className="hidden" 
+          />
+        </form>
       </div>
     </div>
   )

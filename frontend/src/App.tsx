@@ -1,10 +1,10 @@
 import React from 'react'
-import FileDragAndDrop from './FileDragAndDrop'
+import Transcriber from './features/transcriber/Transcriber'
 
 export default function App() {
   return (
     <div>
-      <FileDragAndDrop />
+      <Transcriber />
     </div>
   )
 }
