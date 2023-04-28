@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import FileDragAndDrop from './FileDragAndDrop'
 import AudioList from './AudioList'
+import InfoAlert from '../../components/InfoAlert'
 import axios, { AxiosError, AxiosProgressEvent } from 'axios'
 import { AudioFile } from './types'
 
@@ -56,7 +57,6 @@ export default function Transcriber() {
 
   async function transcribe() {
     if (currentIndex === null || currentIndex >= audioFiles.length) {
-      setCurrentIndex(null)
       return
     }
 
@@ -75,19 +75,29 @@ export default function Transcriber() {
         }
         return item
       })
+      const nextIndex = newAudioFiles.findIndex(item => item.status === 'READY')
+
       setAudioFiles(newAudioFiles)
+      setCurrentIndex(nextIndex >= 0 ? nextIndex : null)
     } catch (error) {
       console.error(error)
-    } finally {
-      setCurrentIndex(currentIndex+1)
     }
   }
 
   return (
     <div>
       <FileDragAndDrop onSelected={handleUploads} />
+      {currentIndex !== null && (
+        <div className="mt-7">
+          <InfoAlert>
+            We are transcribing your audio files. Please keep your browser and this tab open.
+          </InfoAlert>
+        </div>
+      )}
       {audioFiles.length > 0 && (
-        <AudioList audioFiles={audioFiles} />
+        <div className="mt-7 max-w-4xl mx-auto">
+          <AudioList audioFiles={audioFiles} />
+        </div>
       )}
     </div>
   )

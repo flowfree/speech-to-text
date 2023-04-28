@@ -41,8 +41,8 @@ export default function FileDragAndDrop({ onSelected }: Props) {
     }
   };
 
-  function getBorder() {
-    return isDragging ? 'border border-dashed border-indigo-400' : 'border border-slate-100'
+  function getBorderType() {
+    return isDragging ? 'border-dashed' : 'border-solid'
   }
 
   return (
@@ -53,7 +53,7 @@ export default function FileDragAndDrop({ onSelected }: Props) {
       onDragOver = {handleDragOver}
       onDrop={handleDrop}
       onClick={handleClick}
-      className={getBorder() + " py-7 flex flex-col items-center justify-center gap-4 rounded-2xl bg-slate-100 cursor-pointer"}
+      className={getBorderType() + " py-12 flex flex-col items-center justify-center gap-4 rounded-md bg-gray-100 cursor-pointer border border-slate-100"}
     >
       <p className="text-[80px] text-indigo-600">
         <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" className="text-brand-500 dark:text-white" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
