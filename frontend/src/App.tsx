@@ -15,6 +15,9 @@ export default function App() {
       <div className="mt-10 max-w-4xl mx-auto">
         <Transcriber />
       </div>
+      <footer className="mt-24">
+
+      </footer>
     </div>
   )
 }
