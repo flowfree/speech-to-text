@@ -32,3 +32,16 @@ Make sure you have Python 3.8+ installed on your machine.
             --reload
 
 The Speech to Text API will be available at `https://localhost:8000`.
+
+## Using the API
+
+You can use Curl to upload your audio file and get the transcription. For example, to transcribe and audio file named `sample.wav`:
+
+    curl -F audio=@sample.wav https://localhost:8000/predict 
+
+It will return JSON file like this:
+
+    {
+      "audio": "sample.wav", 
+      "text": "..."
+    }
