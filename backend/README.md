@@ -1,7 +1,7 @@
 Backend
 =======
 
-The API endpoints for the Speech to Text client.
+The API endpoints for the Speech to Text application.
 
 ## Requirements
 
