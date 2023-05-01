@@ -7,7 +7,7 @@ Make sure you have Python 3.8+ installed on your machine.
 
 ## Run the development server
 
-1.  Generate the SSL certificates for the local dev server using [mkcert](https://github.com/FiloSottile/mkcert) by following the guide. We will assume that you have generated both the certificate named `localhost.pem` and the key file named `localhost-key.pem` 
+1.  Generate the SSL certificates for the local dev server using [mkcert](https://github.com/FiloSottile/mkcert) by following the instructions on the Github page. The rest of the steps will assume that you already have the certificate named `localhost.pem` and the key file named `localhost-key.pem` 
 
 1.  Change your current working directory to the backend code:
 
