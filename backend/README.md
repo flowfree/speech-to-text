@@ -22,7 +22,7 @@ Make sure you have Python 3.8+ installed on your machine.
 
         pip install -r requirements.txt
 
-1.  Run the SSL development server:
+1.  Run the development server:
 
         uvicorn src.main:app
 
