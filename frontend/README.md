@@ -19,7 +19,7 @@ Make sure you have the recent Node.js version installed on your machine.
 
 1.  Open the `.env.development` file and change the `REACT_APP_API_BASE_URL` variable to match with your backend URL. For example:
 
-        REACT_APP_API_BASE_URL=http://localhost:3000
+        REACT_APP_API_BASE_URL=http://localhost:8000
 
 1.  Start the React development server:
 
