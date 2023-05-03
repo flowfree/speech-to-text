@@ -1,0 +1,21 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: speechtotext-backend
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./backend:/app
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    command: uvicorn src.main:app --host 0.0.0.0 --reload
+  frontend:
+    build:
+      context: ./frontend
+    container_name: speechtotext-frontend
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend:/app
+    command: npm start

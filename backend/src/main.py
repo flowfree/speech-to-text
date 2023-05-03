@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 import tempfile
 import pathlib
@@ -32,6 +33,7 @@ def home():
 
 
 model = 'openai/whisper-small.en'
+logging.info(f'Downloading model {model}...')
 transcriber = pipeline(
     'automatic-speech-recognition', 
     model=model,
